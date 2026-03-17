@@ -100,7 +100,7 @@ export default function MoodForm({ initialEntry = null }: MoodFormProps) {
               >
                 <span className="text-2xl">{emoji}</span>
                 <span
-                  className={`mt-1 text-xs font-medium ${
+                  className={`mt-1 hidden text-xs font-medium sm:block ${
                     moodRating === rating ? "text-indigo-600" : "text-gray-400"
                   }`}
                 >

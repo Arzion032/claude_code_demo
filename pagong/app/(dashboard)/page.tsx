@@ -1,6 +1,8 @@
 import { createClient } from "@/lib/supabase/server";
 import MoodForm from "@/components/MoodForm";
 import MoodHeatmap from "@/components/MoodHeatmap";
+import WordCloud from "@/components/WordCloud";
+import WeeklySummary from "@/components/WeeklySummary";
 import type { MoodEntry } from "@/types";
 
 export default async function DashboardPage() {
@@ -19,6 +21,8 @@ export default async function DashboardPage() {
     <div className="space-y-8">
       <MoodForm initialEntry={todayEntry} />
       <MoodHeatmap />
+      <WordCloud />
+      <WeeklySummary />
     </div>
   );
 }

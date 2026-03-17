@@ -21,7 +21,7 @@ export default function Navbar() {
         <span className="text-lg font-semibold text-indigo-600">
           🐢 Pagong
         </span>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-3 sm:gap-6">
           <Link
             href="/"
             className={`text-sm font-medium transition-colors ${
