@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes turtle-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.turtle-spin {
+  display: inline-block;
+  animation: turtle-spin 1s linear infinite;
+}

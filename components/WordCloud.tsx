@@ -67,13 +67,22 @@ export default function WordCloud() {
 
   useEffect(() => {
     fetch("/api/entries")
-      .then((r) => r.json())
-      .then((entries: MoodEntry[]) => {
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      })
+      .then((data: unknown) => {
+        if (!Array.isArray(data)) {
+          console.error("[WordCloud] /api/entries returned non-array:", data);
+          return;
+        }
+        const entries = data as MoodEntry[];
         setEntryCount(entries.length);
         if (entries.length >= 5) {
           setWords(buildWordFrequency(entries));
         }
       })
+      .catch((err) => console.error("[WordCloud] fetch failed:", err))
       .finally(() => setLoading(false));
   }, []);
 
@@ -87,9 +96,13 @@ export default function WordCloud() {
     <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
       <h2 className="mb-4 text-lg font-semibold text-gray-900">Word Cloud</h2>
 
+      {/* Always-rendered zero-height div — gives containerRef a stable DOM node
+          so offsetWidth is correct on mount regardless of which branch renders */}
+      <div ref={containerRef} className="w-full" style={{ height: 0 }} />
+
       {loading ? (
         <div className="flex h-40 items-center justify-center">
-          <div className="h-5 w-5 animate-spin rounded-full border-2 border-indigo-600 border-t-transparent" />
+          <span className="turtle-spin text-3xl">🐢</span>
         </div>
       ) : entryCount !== null && entryCount < 5 ? (
         <div className="flex h-40 flex-col items-center justify-center gap-2 text-center">
@@ -109,8 +122,7 @@ export default function WordCloud() {
           </p>
         </div>
       ) : (
-        // containerRef measures width; Wordcloud renders once cloudWidth is known
-        <div ref={containerRef} style={{ height: CLOUD_HEIGHT }}>
+        <div style={{ height: CLOUD_HEIGHT }}>
           {cloudWidth > 0 && (
             <Wordcloud
               words={words}
