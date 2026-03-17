@@ -2,7 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import MoodForm from "@/components/MoodForm";
 import MoodHeatmap from "@/components/MoodHeatmap";
 import WordCloud from "@/components/WordCloud";
-import WeeklySummary from "@/components/WeeklySummary";
+import PagongSpeaks from "@/components/PagongSpeaks";
 import type { MoodEntry } from "@/types";
 
 export default async function DashboardPage() {
@@ -18,20 +18,22 @@ export default async function DashboardPage() {
   const todayEntry = (data as MoodEntry | null) ?? null;
 
   return (
-    <div className="space-y-8">
-      {/* Row 1 — primary action: log today's mood */}
-      <MoodForm initialEntry={todayEntry} />
-
-      {/* Row 2 — heatmap (wider) + weekly summary (narrower) */}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+    <div className="space-y-6">
+      {/* Row 1 — Mood form (primary action) + Heatmap (context) side by side */}
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-5">
         <div className="lg:col-span-2">
-          <MoodHeatmap />
+          <MoodForm initialEntry={todayEntry} />
         </div>
-        <WeeklySummary />
+        <div className="lg:col-span-3">
+          <div className="grid h-full grid-rows-[1fr] gap-6">
+            <MoodHeatmap />
+            <WordCloud />
+          </div>
+        </div>
       </div>
 
-      {/* Row 3 — word cloud: full width so layout algorithm has max space */}
-      <WordCloud />
+      {/* Row 2 — Pagong Speaks: the main feature, full width */}
+      <PagongSpeaks />
     </div>
   );
 }

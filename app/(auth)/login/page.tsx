@@ -53,7 +53,7 @@ export default function LoginPage() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
             placeholder="you@example.com"
           />
         </div>
@@ -71,7 +71,7 @@ export default function LoginPage() {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
             placeholder="••••••••"
           />
         </div>
@@ -85,7 +85,7 @@ export default function LoginPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full rounded-lg bg-indigo-600 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-60 transition-colors"
+          className="w-full rounded-lg bg-emerald-600 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700 disabled:opacity-60 transition-colors"
         >
           {loading ? "Signing in…" : "Sign in"}
         </button>
@@ -93,7 +93,7 @@ export default function LoginPage() {
 
       <p className="mt-5 text-center text-sm text-gray-500">
         Don&apos;t have an account?{" "}
-        <Link href="/signup" className="font-medium text-indigo-600 hover:underline">
+        <Link href="/signup" className="font-medium text-emerald-600 hover:underline">
           Sign up
         </Link>
       </p>

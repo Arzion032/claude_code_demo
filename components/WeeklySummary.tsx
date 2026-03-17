@@ -47,7 +47,7 @@ export default function WeeklySummary() {
           </p>
           <button
             onClick={fetchSummary}
-            className="rounded-xl bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-indigo-700"
+            className="rounded-xl bg-emerald-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-emerald-700"
           >
             Generate Summary
           </button>
@@ -64,7 +64,7 @@ export default function WeeklySummary() {
           </p>
           <button
             onClick={fetchSummary}
-            className="self-start rounded-xl bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-indigo-700"
+            className="self-start rounded-xl bg-emerald-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-emerald-700"
           >
             Try Again
           </button>

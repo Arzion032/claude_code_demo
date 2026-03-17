@@ -5,11 +5,11 @@ import { MOOD_SCALE, type MoodEntry } from "@/types";
 
 // Indigo intensity mapped to mood rating 1–5. Empty days use gray-100.
 const RATING_COLOR: Record<number, string> = {
-  1: "bg-indigo-100",
-  2: "bg-indigo-200",
-  3: "bg-indigo-300",
-  4: "bg-indigo-500",
-  5: "bg-indigo-700",
+  1: "bg-emerald-100",
+  2: "bg-emerald-200",
+  3: "bg-emerald-400",
+  4: "bg-emerald-600",
+  5: "bg-emerald-800",
 };
 
 function getLast30Days(): string[] {
@@ -49,7 +49,7 @@ export default function MoodHeatmap() {
 
       {loading ? (
         <div className="flex h-20 items-center justify-center">
-          <div className="h-5 w-5 animate-spin rounded-full border-2 border-indigo-600 border-t-transparent" />
+          <span className="turtle-spin text-2xl">🐢</span>
         </div>
       ) : (
         <>
@@ -91,11 +91,11 @@ export default function MoodHeatmap() {
             <span>Less</span>
             <div className="flex gap-1">
               <div className="h-3 w-3 rounded-sm bg-gray-100" />
-              <div className="h-3 w-3 rounded-sm bg-indigo-100" />
-              <div className="h-3 w-3 rounded-sm bg-indigo-200" />
-              <div className="h-3 w-3 rounded-sm bg-indigo-300" />
-              <div className="h-3 w-3 rounded-sm bg-indigo-500" />
-              <div className="h-3 w-3 rounded-sm bg-indigo-700" />
+              <div className="h-3 w-3 rounded-sm bg-emerald-100" />
+              <div className="h-3 w-3 rounded-sm bg-emerald-200" />
+              <div className="h-3 w-3 rounded-sm bg-emerald-400" />
+              <div className="h-3 w-3 rounded-sm bg-emerald-600" />
+              <div className="h-3 w-3 rounded-sm bg-emerald-800" />
             </div>
             <span>More</span>
           </div>

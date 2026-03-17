@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Pagong — Kwento Mo Sa'ken",
+  title: "Pagong",
   description: "Daily mood tracker with sentiment analysis",
+  icons: {
+    icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐢</text></svg>",
+  },
 };
 
 export default function RootLayout({
@@ -13,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-white text-gray-900 antialiased">
+      <body className="min-h-screen bg-gray-50 text-gray-900 antialiased">
         {children}
       </body>
     </html>

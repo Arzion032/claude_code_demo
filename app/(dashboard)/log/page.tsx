@@ -21,7 +21,7 @@ export default async function LogPage() {
           <p className="text-3xl">📓</p>
           <p className="mt-3 text-sm text-gray-500">
             No entries yet. Log your first mood on the{" "}
-            <a href="/" className="font-medium text-indigo-600 hover:underline">
+            <a href="/" className="font-medium text-emerald-600 hover:underline">
               dashboard
             </a>
             !

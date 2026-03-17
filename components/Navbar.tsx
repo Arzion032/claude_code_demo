@@ -17,8 +17,8 @@ export default function Navbar() {
 
   return (
     <nav className="border-b border-gray-200 bg-white">
-      <div className="mx-auto flex max-w-3xl items-center justify-between px-4 py-3">
-        <span className="text-lg font-semibold text-indigo-600">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
+        <span className="text-lg font-semibold text-emerald-600">
           🐢 Pagong — Kwento Mo Sa'ken
         </span>
         <div className="flex items-center gap-3 sm:gap-6">
@@ -26,7 +26,7 @@ export default function Navbar() {
             href="/"
             className={`text-sm font-medium transition-colors ${
               pathname === "/"
-                ? "text-indigo-600"
+                ? "text-emerald-600"
                 : "text-gray-500 hover:text-gray-900"
             }`}
           >
@@ -36,7 +36,7 @@ export default function Navbar() {
             href="/log"
             className={`text-sm font-medium transition-colors ${
               pathname === "/log"
-                ? "text-indigo-600"
+                ? "text-emerald-600"
                 : "text-gray-500 hover:text-gray-900"
             }`}
           >
@@ -44,7 +44,7 @@ export default function Navbar() {
           </Link>
           <button
             onClick={handleLogout}
-            className="rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700 transition-colors"
+            className="rounded-md bg-emerald-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-emerald-700 transition-colors"
           >
             Logout
           </button>

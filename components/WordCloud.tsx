@@ -47,8 +47,8 @@ function buildWordFrequency(entries: MoodEntry[]): Word[] {
 }
 
 // Indigo palette matching the app accent
-const COLORS = ["#4338ca", "#4f46e5", "#6366f1", "#818cf8", "#a5b4fc"];
-const CLOUD_HEIGHT = 224;
+const COLORS = ["#064e3b", "#047857", "#059669", "#10b981", "#6ee7b7"];
+const CLOUD_HEIGHT = 160;
 const FONT_FAMILY = "ui-sans-serif, system-ui, sans-serif";
 
 export default function WordCloud() {
@@ -101,11 +101,11 @@ export default function WordCloud() {
       <div ref={containerRef} className="w-full" style={{ height: 0 }} />
 
       {loading ? (
-        <div className="flex h-40 items-center justify-center">
+        <div className="flex h-32 items-center justify-center">
           <span className="turtle-spin text-3xl">🐢</span>
         </div>
       ) : entryCount !== null && entryCount < 5 ? (
-        <div className="flex h-40 flex-col items-center justify-center gap-2 text-center">
+        <div className="flex h-32 flex-col items-center justify-center gap-2 text-center">
           <p className="text-2xl">💬</p>
           <p className="text-sm text-gray-500">
             Log at least <span className="font-medium">5 entries</span> to see
@@ -116,7 +116,7 @@ export default function WordCloud() {
           </p>
         </div>
       ) : words.length === 0 ? (
-        <div className="flex h-40 items-center justify-center">
+        <div className="flex h-32 items-center justify-center">
           <p className="text-sm text-gray-500">
             No words to display yet — try adding some notes!
           </p>

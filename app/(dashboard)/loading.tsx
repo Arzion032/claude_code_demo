@@ -17,7 +17,7 @@ export default function DashboardLoading() {
           ))}
         </div>
         <div className="h-20 rounded-lg bg-gray-100" />
-        <div className="h-10 rounded-lg bg-indigo-100" />
+        <div className="h-10 rounded-lg bg-emerald-100" />
       </div>
 
       {/* Heatmap skeleton */}

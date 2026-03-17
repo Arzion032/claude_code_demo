@@ -69,7 +69,7 @@ export default function MoodForm({ initialEntry = null }: MoodFormProps) {
           {isEditMode ? "Edit today's mood" : "How are you feeling today?"}
         </h2>
         {isEditMode && (
-          <span className="rounded-full bg-indigo-50 px-2.5 py-0.5 text-xs font-medium text-indigo-600">
+          <span className="rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-medium text-emerald-600">
             Editing
           </span>
         )}
@@ -94,14 +94,14 @@ export default function MoodForm({ initialEntry = null }: MoodFormProps) {
                 onClick={() => setMoodRating(rating)}
                 className={`flex flex-1 flex-col items-center rounded-xl border-2 py-3 transition-all ${
                   moodRating === rating
-                    ? "border-indigo-500 bg-indigo-50"
+                    ? "border-emerald-500 bg-emerald-50"
                     : "border-gray-200 hover:border-gray-300 hover:bg-gray-50"
                 }`}
               >
                 <span className="text-2xl">{emoji}</span>
                 <span
                   className={`mt-1 hidden text-xs font-medium sm:block ${
-                    moodRating === rating ? "text-indigo-600" : "text-gray-400"
+                    moodRating === rating ? "text-emerald-600" : "text-gray-400"
                   }`}
                 >
                   {label}
@@ -136,12 +136,12 @@ export default function MoodForm({ initialEntry = null }: MoodFormProps) {
           </div>
           <textarea
             id="note"
-            rows={3}
+            rows={7}
             maxLength={MAX_NOTE_LENGTH}
             value={note}
             onChange={(e) => setNote(e.target.value)}
             placeholder="What's on your mind?"
-            className="w-full resize-none rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+            className="w-full resize-none rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
           />
         </div>
 
@@ -162,9 +162,13 @@ export default function MoodForm({ initialEntry = null }: MoodFormProps) {
         <button
           type="submit"
           disabled={loading}
-          className="w-full rounded-lg bg-indigo-600 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-60 transition-colors"
+          className="w-full rounded-lg bg-emerald-600 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700 disabled:opacity-60 transition-colors"
         >
-          {loading ? "Saving…" : isEditMode ? "Update entry" : "Save entry"}
+          {loading ? (
+            <span className="flex items-center justify-center gap-2">
+              <span className="turtle-spin text-base">🐢</span> Saving…
+            </span>
+          ) : isEditMode ? "Update entry" : "Save entry"}
         </button>
       </form>
     </div>
