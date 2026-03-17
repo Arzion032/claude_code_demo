@@ -1,11 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
+import { useEffect, useRef, useState } from "react";
+import { Wordcloud } from "@visx/wordcloud";
+import { Text } from "@visx/text";
 import type { MoodEntry } from "@/types";
-
-// react-wordcloud uses ResizeObserver and SVG APIs — must skip SSR
-const ReactWordcloud = dynamic(() => import("react-wordcloud"), { ssr: false });
 
 interface Word {
   text: string;
@@ -31,7 +29,6 @@ function buildWordFrequency(entries: MoodEntry[]): Word[] {
 
   entries.forEach((entry) => {
     if (!entry.note) return;
-    // Lowercase, strip punctuation, split on whitespace
     const words = entry.note
       .toLowerCase()
       .replace(/[^a-z\s']/g, "")
@@ -46,21 +43,27 @@ function buildWordFrequency(entries: MoodEntry[]): Word[] {
   return Object.entries(freq)
     .map(([text, value]) => ({ text, value }))
     .sort((a, b) => b.value - a.value)
-    .slice(0, 80); // cap at 80 words for readability
+    .slice(0, 80);
 }
 
-const WORDCLOUD_OPTIONS = {
-  rotations: 0,
-  fontFamily: "ui-sans-serif, system-ui, sans-serif",
-  fontSizes: [14, 52] as [number, number],
-  padding: 3,
-  deterministic: true,
-};
+// Indigo palette matching the app accent
+const COLORS = ["#4338ca", "#4f46e5", "#6366f1", "#818cf8", "#a5b4fc"];
+const CLOUD_HEIGHT = 224;
+const FONT_FAMILY = "ui-sans-serif, system-ui, sans-serif";
 
 export default function WordCloud() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [cloudWidth, setCloudWidth] = useState(0);
   const [words, setWords] = useState<Word[]>([]);
   const [entryCount, setEntryCount] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
+
+  // Measure container width once mounted so the SVG fills it exactly
+  useEffect(() => {
+    if (containerRef.current) {
+      setCloudWidth(containerRef.current.offsetWidth);
+    }
+  }, []);
 
   useEffect(() => {
     fetch("/api/entries")
@@ -73,6 +76,12 @@ export default function WordCloud() {
       })
       .finally(() => setLoading(false));
   }, []);
+
+  // Linear font scale: min frequency → 14px, max frequency → 52px
+  const minVal = words.length ? Math.min(...words.map((w) => w.value)) : 1;
+  const maxVal = words.length ? Math.max(...words.map((w) => w.value)) : 1;
+  const fontScale = (value: number) =>
+    minVal === maxVal ? 28 : 14 + ((value - minVal) / (maxVal - minVal)) * 38;
 
   return (
     <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
@@ -100,8 +109,38 @@ export default function WordCloud() {
           </p>
         </div>
       ) : (
-        <div className="h-56 w-full">
-          <ReactWordcloud words={words} options={WORDCLOUD_OPTIONS} />
+        // containerRef measures width; Wordcloud renders once cloudWidth is known
+        <div ref={containerRef} style={{ height: CLOUD_HEIGHT }}>
+          {cloudWidth > 0 && (
+            <Wordcloud
+              words={words}
+              width={cloudWidth}
+              height={CLOUD_HEIGHT}
+              fontSize={(w) => fontScale(w.value)}
+              font={FONT_FAMILY}
+              padding={3}
+              spiral="archimedean"
+              rotate={0}
+              random={() => 0.5}
+            >
+              {(cloudWords) => (
+                <g>
+                  {cloudWords.map((w, i) => (
+                    <Text
+                      key={w.text}
+                      fill={COLORS[i % COLORS.length]}
+                      textAnchor="middle"
+                      transform={`translate(${w.x}, ${w.y}) rotate(${w.rotate})`}
+                      fontSize={w.size}
+                      fontFamily={w.font}
+                    >
+                      {w.text}
+                    </Text>
+                  ))}
+                </g>
+              )}
+            </Wordcloud>
+          )}
         </div>
       )}
     </div>
